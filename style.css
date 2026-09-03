@@ -713,3 +713,177 @@ footer {
     line-height: 1;
 }
 
+/* =========================================
+   FLOATING ASK AUM LAUNCHER
+========================================= */
+
+#aum-chat-launcher {
+    position: fixed;
+
+    right: 24px;
+    bottom: 24px;
+
+    z-index: 999999;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    animation: aumCornerFloat 7s ease-in-out infinite;
+}
+
+/* Floating chatbot button */
+
+#aum-chat-button {
+    position: relative;
+
+    width: 58px;
+    height: 58px;
+
+    padding: 0;
+    margin: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #111111;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+#aum-chat-button:hover {
+    background: #333333;
+    transform: scale(1.08);
+}
+
+#aum-chat-button span {
+    font-size: 25px;
+    line-height: 1;
+
+    animation: aumSparkle 2s ease-in-out infinite;
+}
+
+/* Small greeting bubble */
+
+#aum-chat-greeting {
+    padding: 8px 13px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 14px 14px 4px 14px;
+
+    background: #ffffff;
+    color: #222222;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.12);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(8px) scale(0.9);
+    transform-origin: right center;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+/* Show greeting briefly */
+
+#aum-chat-greeting.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Gentle movement around the corner */
+
+@keyframes aumCornerFloat {
+
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    20% {
+        transform: translate(-4px, -6px) rotate(-1deg);
+    }
+
+    40% {
+        transform: translate(3px, -10px) rotate(1deg);
+    }
+
+    60% {
+        transform: translate(-3px, -5px) rotate(0deg);
+    }
+
+    80% {
+        transform: translate(2px, -8px) rotate(1deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+/* Sparkle animation */
+
+@keyframes aumSparkle {
+
+    0%,
+    100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: rotate(15deg) scale(1.15);
+        opacity: 0.75;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    #aum-chat-launcher {
+        right: 18px;
+        bottom: 18px;
+    }
+
+    #aum-chat-button {
+        width: 55px;
+        height: 55px;
+    }
+
+    #aum-chat-greeting {
+        font-size: 11px;
+        padding: 7px 10px;
+    }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #aum-chat-launcher,
+    #aum-chat-button span {
+        animation: none;
+    }
+}
+
