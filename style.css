@@ -670,6 +670,7 @@ footer {
     .education-badge {
         display: none;
     }
+}
 /* =========================================================
    AUM AI - FLOATING CHATBOT
    ========================================================= */
@@ -1306,11 +1307,8 @@ footer {
     }
 
 }
-
-
-}
-   body {
+ body {
     outline: 10px solid red !important;
 }
-   
+
 }
