@@ -1187,6 +1187,8 @@
 
         const aumChatMessages =
             document.getElementById("aum-chat-messages");
+        const aumChatGreeting =
+            document.getElementById("aum-chat-greeting");
 
 
         function aumScrollChat() {
@@ -1298,12 +1300,47 @@
                 );
             }, 900);
         }
+        function showAumGreeting() {
+    if (
+        aumChatWindow.classList.contains("aum-chat-open") ||
+        aumChatButton.style.display === "none"
+    ) {
+        return;
+    }
+
+    aumChatGreeting.classList.add("show");
+
+    setTimeout(function () {
+        aumChatGreeting.classList.remove("show");
+    }, 2800);
+}
+
+/* First greeting after page load */
+
+setTimeout(function () {
+    showAumGreeting();
+}, 3500);
+
+/* Show greeting at random intervals */
+
+function scheduleAumGreeting() {
+    const randomDelay =
+        Math.floor(Math.random() * 7000) + 8000;
+
+    setTimeout(function () {
+        showAumGreeting();
+        scheduleAumGreeting();
+    }, randomDelay);
+}
+
+scheduleAumGreeting();
 
 
         aumChatButton.addEventListener("click", function () {
             aumChatWindow.classList.add("aum-chat-open");
             aumChatButton.style.display = "none";
-
+            aumChatButton.style.display = "none";
+            aumChatGreeting.classList.remove("show");
             setTimeout(function () {
                 aumChatInput.focus();
             }, 250);
