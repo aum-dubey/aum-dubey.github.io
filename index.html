@@ -583,104 +583,128 @@
 
     </footer>
 
-    <!-- ================= CHATBOT ================= -->
+<!-- ================= AI CHATBOT ================= -->
 
-<!-- Floating Chat Button -->
-<button id="chatbot-button" class="chatbot-button" aria-label="Open AI chatbot">
-    <span class="chatbot-icon">✦</span>
-    <span class="chatbot-label">Ask Aum</span>
+<!-- Floating AI Button -->
+<button id="chatbot-button" class="chatbot-float" aria-label="Open AI assistant">
+    <span class="chatbot-spark">✦</span>
 </button>
 
-<!-- Chat Window -->
-<div id="chatbot-window" class="chatbot-window">
+<!-- Chatbot -->
+<div id="chatbot-window" class="chatbot">
 
-    <!-- Chat Header -->
-    <div class="chatbot-header">
-        <div class="chatbot-header-info">
-            <div class="chatbot-avatar">A</div>
+    <!-- Header -->
+    <div class="chatbot-top">
+
+        <div class="chatbot-profile">
+
+            <div class="chatbot-logo">
+                A
+            </div>
 
             <div>
-                <h3>Ask Aum AI</h3>
-                <span>
-                    <span class="status-dot"></span>
-                    Online
-                </span>
+                <div class="chatbot-name">Ask Aum</div>
+
+                <div class="chatbot-status">
+                    <span></span>
+                    AI Assistant
+                </div>
             </div>
+
         </div>
 
-        <button id="chatbot-close" class="chatbot-close" aria-label="Close chatbot">
-            &times;
+        <button id="chatbot-close" class="chatbot-close">
+            ×
         </button>
+
     </div>
 
-    <!-- Chat Messages -->
-    <div id="chatbot-messages" class="chatbot-messages">
 
-        <!-- Welcome Message -->
-        <div class="chat-message bot-message">
-            <div class="message-avatar">AI</div>
+    <!-- Chat Body -->
+    <div id="chatbot-messages" class="chatbot-body">
 
-            <div class="message-content">
-                <p>
-                    Hi! 👋 I'm Aum's AI assistant.
-                </p>
+        <!-- Welcome -->
+        <div class="bot-message-wrapper">
 
-                <p>
-                    Ask me about Aum's projects, skills, education,
-                    machine learning experience, or career interests.
-                </p>
+            <div class="bot-avatar">
+                ✦
             </div>
+
+            <div class="bot-message">
+
+                <div class="message-label">
+                    Ask Aum
+                </div>
+
+                <p>
+                    Hi! I'm Aum's AI assistant. 👋
+                </p>
+
+                <p>
+                    Ask me anything about his projects, technical skills,
+                    education, or experience.
+                </p>
+
+            </div>
+
         </div>
 
-        <!-- Suggested Questions -->
-        <div class="chat-suggestions">
 
-            <button class="suggestion-btn">
+        <!-- Suggestions -->
+        <div class="suggestions">
+
+            <button class="suggestion">
+                <span>💻</span>
                 What projects has Aum built?
             </button>
 
-            <button class="suggestion-btn">
-                What are Aum's AI/ML skills?
+            <button class="suggestion">
+                <span>🧠</span>
+                What are his AI/ML skills?
             </button>
 
-            <button class="suggestion-btn">
+            <button class="suggestion">
+                <span>🎓</span>
                 Tell me about his education
             </button>
 
-            <button class="suggestion-btn">
-                What roles is Aum looking for?
+            <button class="suggestion">
+                <span>🚀</span>
+                What roles is Aum targeting?
             </button>
 
         </div>
 
     </div>
 
-    <!-- Chat Input -->
-    <div class="chatbot-input-area">
 
-        <input
-            type="text"
-            id="chatbot-input"
-            placeholder="Ask me something..."
-            autocomplete="off"
-        />
+    <!-- Input -->
+    <div class="chatbot-bottom">
 
-        <button
-            id="chatbot-send"
-            class="chatbot-send"
-            aria-label="Send message"
-        >
-            ➤
-        </button>
+        <div class="chat-input-wrapper">
+
+            <input
+                type="text"
+                id="chatbot-input"
+                placeholder="Ask Aum anything..."
+                autocomplete="off"
+            />
+
+            <button id="chatbot-send" class="chat-send">
+                ↑
+            </button>
+
+        </div>
+
+        <div class="chatbot-disclaimer">
+            AI assistant · Powered by Aum's portfolio
+        </div>
 
     </div>
 
 </div>
 
-<!-- ================= END CHATBOT ================= -->
 
-
-<!-- Chatbot JavaScript -->
 <script>
 
     const chatbotButton = document.getElementById("chatbot-button");
@@ -691,97 +715,151 @@
     const chatbotSend = document.getElementById("chatbot-send");
 
     const chatbotMessages = document.getElementById("chatbot-messages");
-    const suggestionButtons = document.querySelectorAll(".suggestion-btn");
+
+    const suggestions = document.querySelectorAll(".suggestion");
 
 
-    /* ================= OPEN CHAT ================= */
+    /* ================= OPEN ================= */
 
     chatbotButton.addEventListener("click", () => {
 
-        chatbotWindow.classList.add("active");
+        chatbotWindow.classList.add("open");
 
-        chatbotButton.classList.add("hidden");
+        chatbotButton.classList.add("open");
 
         setTimeout(() => {
             chatbotInput.focus();
-        }, 200);
+        }, 300);
 
     });
 
 
-    /* ================= CLOSE CHAT ================= */
+    /* ================= CLOSE ================= */
 
     chatbotClose.addEventListener("click", () => {
 
-        chatbotWindow.classList.remove("active");
+        chatbotWindow.classList.remove("open");
 
-        chatbotButton.classList.remove("hidden");
+        chatbotButton.classList.remove("open");
 
     });
 
 
-    /* ================= ADD MESSAGE ================= */
+    /* ================= ADD USER MESSAGE ================= */
 
-    function addMessage(message, sender) {
+    function addUserMessage(message) {
 
-        const messageWrapper = document.createElement("div");
+        const wrapper = document.createElement("div");
 
-        if (sender === "user") {
+        wrapper.className = "user-message-wrapper";
 
-            messageWrapper.className = "chat-message user-message";
+        wrapper.innerHTML = `
+            <div class="user-message">
+                ${message}
+            </div>
+        `;
 
-            messageWrapper.innerHTML = `
-                <div class="message-content">
-                    <p>${message}</p>
-                </div>
-            `;
+        chatbotMessages.appendChild(wrapper);
 
-        } else {
-
-            messageWrapper.className = "chat-message bot-message";
-
-            messageWrapper.innerHTML = `
-                <div class="message-avatar">AI</div>
-
-                <div class="message-content">
-                    <p>${message}</p>
-                </div>
-            `;
-
-        }
-
-        chatbotMessages.appendChild(messageWrapper);
-
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        scrollChat();
 
     }
 
 
-    /* ================= DEMO RESPONSE ================= */
+    /* ================= TYPING ================= */
+
+    function showTyping() {
+
+        const typing = document.createElement("div");
+
+        typing.className = "typing-wrapper";
+
+        typing.id = "typing-indicator";
+
+        typing.innerHTML = `
+            <div class="bot-avatar">✦</div>
+
+            <div class="typing">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+        `;
+
+        chatbotMessages.appendChild(typing);
+
+        scrollChat();
+
+    }
+
+
+    /* ================= BOT MESSAGE ================= */
+
+    function addBotMessage(message) {
+
+        const typing = document.getElementById("typing-indicator");
+
+        if (typing) {
+            typing.remove();
+        }
+
+        const wrapper = document.createElement("div");
+
+        wrapper.className = "bot-message-wrapper";
+
+        wrapper.innerHTML = `
+            <div class="bot-avatar">
+                ✦
+            </div>
+
+            <div class="bot-message">
+
+                <div class="message-label">
+                    Ask Aum
+                </div>
+
+                <p>
+                    ${message}
+                </p>
+
+            </div>
+        `;
+
+        chatbotMessages.appendChild(wrapper);
+
+        scrollChat();
+
+    }
+
+
+    /* ================= SEND ================= */
 
     function sendMessage() {
 
         const message = chatbotInput.value.trim();
 
-        if (message === "") {
+        if (!message) {
             return;
         }
 
-        // Add user message
-        addMessage(message, "user");
+        addUserMessage(message);
 
-        // Clear input
         chatbotInput.value = "";
 
-        // Temporary demo response
+        showTyping();
+
+
+        /* Temporary demo response */
+
         setTimeout(() => {
 
-            addMessage(
-                "I'm currently running in demo mode. Soon I'll be connected to an AI model and will be able to answer questions about Aum's projects, skills, education and experience.",
-                "bot"
+            addBotMessage(
+                "I'm currently in demo mode. Soon I'll be connected to an AI model that can answer questions about Aum's projects, skills, education and experience."
             );
 
-        }, 600);
+        }, 900);
 
     }
 
@@ -791,7 +869,7 @@
     chatbotSend.addEventListener("click", sendMessage);
 
 
-    /* ================= ENTER KEY ================= */
+    /* ================= ENTER ================= */
 
     chatbotInput.addEventListener("keydown", (event) => {
 
@@ -808,13 +886,11 @@
 
     /* ================= SUGGESTIONS ================= */
 
-    suggestionButtons.forEach(button => {
+    suggestions.forEach(button => {
 
         button.addEventListener("click", () => {
 
-            const question = button.textContent.trim();
-
-            chatbotInput.value = question;
+            chatbotInput.value = button.innerText.trim();
 
             sendMessage();
 
@@ -822,7 +898,21 @@
 
     });
 
+
+    /* ================= SCROLL ================= */
+
+    function scrollChat() {
+
+        chatbotMessages.scrollTo({
+            top: chatbotMessages.scrollHeight,
+            behavior: "smooth"
+        });
+
+    }
+
 </script>
+
+<!-- ================= END AI CHATBOT ================= -->
 
 
 </body>
