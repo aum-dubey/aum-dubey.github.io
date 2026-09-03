@@ -583,6 +583,247 @@
 
     </footer>
 
+    <!-- ================= CHATBOT ================= -->
+
+<!-- Floating Chat Button -->
+<button id="chatbot-button" class="chatbot-button" aria-label="Open AI chatbot">
+    <span class="chatbot-icon">✦</span>
+    <span class="chatbot-label">Ask Aum</span>
+</button>
+
+<!-- Chat Window -->
+<div id="chatbot-window" class="chatbot-window">
+
+    <!-- Chat Header -->
+    <div class="chatbot-header">
+        <div class="chatbot-header-info">
+            <div class="chatbot-avatar">A</div>
+
+            <div>
+                <h3>Ask Aum AI</h3>
+                <span>
+                    <span class="status-dot"></span>
+                    Online
+                </span>
+            </div>
+        </div>
+
+        <button id="chatbot-close" class="chatbot-close" aria-label="Close chatbot">
+            &times;
+        </button>
+    </div>
+
+    <!-- Chat Messages -->
+    <div id="chatbot-messages" class="chatbot-messages">
+
+        <!-- Welcome Message -->
+        <div class="chat-message bot-message">
+            <div class="message-avatar">AI</div>
+
+            <div class="message-content">
+                <p>
+                    Hi! 👋 I'm Aum's AI assistant.
+                </p>
+
+                <p>
+                    Ask me about Aum's projects, skills, education,
+                    machine learning experience, or career interests.
+                </p>
+            </div>
+        </div>
+
+        <!-- Suggested Questions -->
+        <div class="chat-suggestions">
+
+            <button class="suggestion-btn">
+                What projects has Aum built?
+            </button>
+
+            <button class="suggestion-btn">
+                What are Aum's AI/ML skills?
+            </button>
+
+            <button class="suggestion-btn">
+                Tell me about his education
+            </button>
+
+            <button class="suggestion-btn">
+                What roles is Aum looking for?
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Chat Input -->
+    <div class="chatbot-input-area">
+
+        <input
+            type="text"
+            id="chatbot-input"
+            placeholder="Ask me something..."
+            autocomplete="off"
+        />
+
+        <button
+            id="chatbot-send"
+            class="chatbot-send"
+            aria-label="Send message"
+        >
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ================= END CHATBOT ================= -->
+
+
+<!-- Chatbot JavaScript -->
+<script>
+
+    const chatbotButton = document.getElementById("chatbot-button");
+    const chatbotWindow = document.getElementById("chatbot-window");
+    const chatbotClose = document.getElementById("chatbot-close");
+
+    const chatbotInput = document.getElementById("chatbot-input");
+    const chatbotSend = document.getElementById("chatbot-send");
+
+    const chatbotMessages = document.getElementById("chatbot-messages");
+    const suggestionButtons = document.querySelectorAll(".suggestion-btn");
+
+
+    /* ================= OPEN CHAT ================= */
+
+    chatbotButton.addEventListener("click", () => {
+
+        chatbotWindow.classList.add("active");
+
+        chatbotButton.classList.add("hidden");
+
+        setTimeout(() => {
+            chatbotInput.focus();
+        }, 200);
+
+    });
+
+
+    /* ================= CLOSE CHAT ================= */
+
+    chatbotClose.addEventListener("click", () => {
+
+        chatbotWindow.classList.remove("active");
+
+        chatbotButton.classList.remove("hidden");
+
+    });
+
+
+    /* ================= ADD MESSAGE ================= */
+
+    function addMessage(message, sender) {
+
+        const messageWrapper = document.createElement("div");
+
+        if (sender === "user") {
+
+            messageWrapper.className = "chat-message user-message";
+
+            messageWrapper.innerHTML = `
+                <div class="message-content">
+                    <p>${message}</p>
+                </div>
+            `;
+
+        } else {
+
+            messageWrapper.className = "chat-message bot-message";
+
+            messageWrapper.innerHTML = `
+                <div class="message-avatar">AI</div>
+
+                <div class="message-content">
+                    <p>${message}</p>
+                </div>
+            `;
+
+        }
+
+        chatbotMessages.appendChild(messageWrapper);
+
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+    }
+
+
+    /* ================= DEMO RESPONSE ================= */
+
+    function sendMessage() {
+
+        const message = chatbotInput.value.trim();
+
+        if (message === "") {
+            return;
+        }
+
+        // Add user message
+        addMessage(message, "user");
+
+        // Clear input
+        chatbotInput.value = "";
+
+        // Temporary demo response
+        setTimeout(() => {
+
+            addMessage(
+                "I'm currently running in demo mode. Soon I'll be connected to an AI model and will be able to answer questions about Aum's projects, skills, education and experience.",
+                "bot"
+            );
+
+        }, 600);
+
+    }
+
+
+    /* ================= SEND BUTTON ================= */
+
+    chatbotSend.addEventListener("click", sendMessage);
+
+
+    /* ================= ENTER KEY ================= */
+
+    chatbotInput.addEventListener("keydown", (event) => {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    });
+
+
+    /* ================= SUGGESTIONS ================= */
+
+    suggestionButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const question = button.textContent.trim();
+
+            chatbotInput.value = question;
+
+            sendMessage();
+
+        });
+
+    });
+
+</script>
+
 
 </body>
 </html>
