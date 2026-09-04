@@ -1280,26 +1280,58 @@
         }
 
 
-        function aumSendMessage() {
-            const message =
-                aumChatInput.value.trim();
+        async function aumSendMessage() {
 
-            if (!message) {
-                return;
+    const message =
+        aumChatInput.value.trim();
+
+    if (!message) {
+        return;
+    }
+
+    aumAddUserMessage(message);
+
+    aumChatInput.value = "";
+
+    aumShowTyping();
+
+    try {
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/api/chat",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    question: message
+                })
             }
+        );
 
-            aumAddUserMessage(message);
-
-            aumChatInput.value = "";
-
-            aumShowTyping();
-
-            setTimeout(function () {
-                aumAddBotMessage(
-                    "I'm currently in demo mode. Soon I'll be connected to an AI model that can answer questions about Aum's projects, skills, education and experience."
-                );
-            }, 900);
+        if (!response.ok) {
+            throw new Error("API request failed");
         }
+
+        const data = await response.json();
+
+        aumAddBotMessage(data.answer);
+
+    } catch (error) {
+
+        console.error("Chatbot error:", error);
+
+        aumAddBotMessage(
+            "Sorry, I couldn't connect to Aum's AI assistant right now."
+        );
+    }
+}
+
+
+        
         function showAumGreeting() {
     if (
         aumChatWindow.classList.contains("aum-chat-open") ||
