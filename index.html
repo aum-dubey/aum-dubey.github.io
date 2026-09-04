@@ -1279,7 +1279,7 @@
             aumScrollChat();
         }
 
-
+        
         async function aumSendMessage() {
 
     const message =
@@ -1295,42 +1295,83 @@
 
     aumShowTyping();
 
+    const apiUrl =
+        "https://aum-portfolio-ai.onrender.com/api/chat";
+
+    const maxAttempts = 3;
+
     try {
 
-        const response = await fetch(
-            "http://127.0.0.1:8000/api/chat",
-            {
-                method: "POST",
+        let response = null;
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+        for (let attempt = 1; attempt <= maxAttempts; attempt++) {
 
-                body: JSON.stringify({
-                    question: message
-                })
+            try {
+
+                response = await fetch(
+                    apiUrl,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            question: message
+                        })
+                    }
+                );
+
+                if (response.ok) {
+                    break;
+                }
+
+                console.warn(
+                    `API attempt ${attempt} failed with status ${response.status}`
+                );
+
+            } catch (error) {
+
+                console.warn(
+                    `API attempt ${attempt} failed:`,
+                    error
+                );
             }
-        );
 
-        if (!response.ok) {
-            throw new Error("API request failed");
+            if (attempt < maxAttempts) {
+
+                await new Promise(
+                    resolve => setTimeout(resolve, 2000)
+                );
+            }
+        }
+
+        if (!response || !response.ok) {
+            throw new Error("API unavailable after retries.");
         }
 
         const data = await response.json();
 
-        aumAddBotMessage(data.answer);
+        aumAddBotMessage(
+            data.answer
+        );
 
     } catch (error) {
 
-        console.error("Chatbot error:", error);
+        console.error(
+            "Chatbot error:",
+            error
+        );
 
         aumAddBotMessage(
-            "Sorry, I couldn't connect to Aum's AI assistant right now."
+            "Aum's AI assistant is temporarily waking up. Please try again in a moment."
         );
     }
 }
 
 
+    
         
         function showAumGreeting() {
     if (
