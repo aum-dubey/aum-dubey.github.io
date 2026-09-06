@@ -901,10 +901,20 @@ footer {
 
     pointer-events: none;
 
-    z-index: -1;
+    z-index: 0;
 }
 
-/* Prevent horizontal/vertical overflow */
+/* Keep the actual website above the dots */
+.navbar,
+.hero,
+.section,
+footer,
+#aum-chat-launcher {
+    position: relative;
+    z-index: 1;
+}
+
+/* Prevent horizontal overflow */
 html,
 body {
     overflow-x: hidden;
