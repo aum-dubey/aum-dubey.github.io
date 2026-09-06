@@ -88,14 +88,14 @@ function animate() {
         dot.y += (targetY - dot.y) * 0.12;
 
         // Dot size
-        let radius = 1.2;
+        let radius = 1.0;
 
         if (distance < interactionRadius) {
             const force =
                 (interactionRadius - distance) /
                 interactionRadius;
 
-            radius = 1.2 + force * 2.8;
+            radius = 1.0 + force * 2.2;
         }
 
         ctx.beginPath();
