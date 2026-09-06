@@ -101,7 +101,7 @@ function animate() {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
 
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "#b5b5b5";
         ctx.fill();
     });
 
