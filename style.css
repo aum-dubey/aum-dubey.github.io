@@ -893,23 +893,17 @@ footer {
 #dot-field {
     position: fixed;
     inset: 0;
-
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     pointer-events: none;
-
     z-index: 0;
 }
 
-/* Keep website content above the dots */
-
-body > *:not(#dot-field) {
+/* Website content stays above the canvas */
+body {
     position: relative;
-    z-index: 1;
 }
-
-/* Make sure sections remain readable */
 
 nav,
 header,
@@ -920,12 +914,9 @@ footer {
     z-index: 1;
 }
 
-/* Disable effect on touch devices */
-
+/* Mobile */
 @media (hover: none) and (pointer: coarse) {
-
     #dot-field {
         display: none;
     }
-
 }
