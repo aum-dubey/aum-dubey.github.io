@@ -432,9 +432,13 @@ nav a:hover {
 
 .project-card {
     padding: 40px;
-    border: 1px solid rgba(190, 190, 180, 0.55);
-    background: #fafaf7;
+
+    background-color: #faf9f6  !important; /* covers dots inside the card */
+
+    border: 1px solid #e5e2da;
+
     border-radius: 14px;
+
     transition: 0.25s ease;
 }
 
