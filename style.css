@@ -889,7 +889,7 @@ footer {
 
 /* =========================================
    INTERACTIVE DOT FIELD
-   ========================================= */
+========================================= */
 
 #dot-field {
     position: fixed;
@@ -904,23 +904,22 @@ footer {
     z-index: 0;
 }
 
-/* Keep the actual website above the dots */
-.navbar,
-.hero,
-.section,
-footer,
-#aum-chat-launcher {
+/* Make sure website content stays above dots */
+
+body > *:not(#dot-field) {
     position: relative;
     z-index: 1;
 }
 
-/* Prevent horizontal overflow */
+/* Prevent unwanted horizontal scrolling */
+
 html,
 body {
     overflow-x: hidden;
 }
 
-/* Mobile */
+/* Don't show on touch devices */
+
 @media (hover: none) and (pointer: coarse) {
     #dot-field {
         display: none;
