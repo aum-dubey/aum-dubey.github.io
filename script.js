@@ -1,7 +1,7 @@
 const canvas = document.createElement("canvas");
 canvas.id = "dot-field";
 
-document.body.prepend(canvas);
+document.body.appendChild(canvas);
 
 const ctx = canvas.getContext("2d");
 
