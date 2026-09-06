@@ -904,21 +904,24 @@ footer {
     z-index: 0;
 }
 
-/* Make sure website content stays above dots */
+/* Keep website content above dots */
 
-body > *:not(#dot-field) {
+.navbar,
+.hero,
+.section,
+footer,
+#aum-chat-launcher,
+#aum-chat-window {
     position: relative;
     z-index: 1;
 }
-
-/* Prevent unwanted horizontal scrolling */
 
 html,
 body {
     overflow-x: hidden;
 }
 
-/* Don't show on touch devices */
+/* Disable on mobile */
 
 @media (hover: none) and (pointer: coarse) {
     #dot-field {
