@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <meta
+    name="description"
+    content="Teach the Robot — a human-guided reinforcement learning experiment by Aum Dubey."
+  />
+  <title>Teach the Robot | Aum. AI Lab</title>
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="../../index.html" aria-label="Go to Aum portfolio home">
+      Aum<span>.</span>
+    </a>
+
+    <div class="topbar-right">
+      <span class="live-badge">
+        <span class="live-dot"></span>
+        AI LAB
+      </span>
+
+      <a class="back-link" href="../../index.html">← Portfolio</a>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <p class="eyebrow">AI LAB / REINFORCEMENT LEARNING</p>
+
+      <h1>
+        Teach the<br />
+        <span>Robot.</span>
+      </h1>
+
+      <p class="hero-copy">
+        Play the warehouse delivery challenge first. Then watch a robot agent
+        make decisions using observations, rewards, and action values.
+      </p>
+    </section>
+
+    <section class="game-layout" aria-label="Teach the Robot game">
+      <div class="game-card">
+        <div class="card-header">
+          <div>
+            <p class="small-label">WAREHOUSE SIMULATION</p>
+            <h2 id="game-title">Human Turn</h2>
+          </div>
+
+          <div id="game-status" class="status-pill">READY</div>
+        </div>
+
+        <div class="game-info-row">
+          <div class="metric">
+            <span class="metric-label">Steps</span>
+            <strong id="steps-value">0 / 60</strong>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Reward</span>
+            <strong id="reward-value">0.0</strong>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Package</span>
+            <strong id="package-value">Not picked up</strong>
+          </div>
+        </div>
+
+        <div
+          id="game-board"
+          class="game-board"
+          role="grid"
+          aria-label="Warehouse game board"
+        ></div>
+
+        <p id="instruction-text" class="instruction-text">
+          Use the arrow keys or the controls below. Pick up the package, then
+          carry it to the delivery zone.
+        </p>
+
+        <div class="controls-wrap">
+          <div class="direction-controls" aria-label="Movement controls">
+            <button class="control-button up-button" data-direction="UP" aria-label="Move up">
+              ↑
+            </button>
+
+            <button class="control-button" data-direction="LEFT" aria-label="Move left">
+              ←
+            </button>
+
+            <button class="control-button" data-direction="DOWN" aria-label="Move down">
+              ↓
+            </button>
+
+            <button class="control-button" data-direction="RIGHT" aria-label="Move right">
+              →
+            </button>
+          </div>
+
+          <div class="game-actions">
+            <button id="restart-button" class="secondary-button">
+              Restart
+            </button>
+
+            <button id="finish-human-button" class="primary-button" disabled>
+              Let Robot Try →
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="reasoning-card" aria-live="polite">
+        <div class="reasoning-header">
+          <div>
+            <p class="small-label">EXPLAINABLE RL</p>
+            <h2>What the robot is thinking</h2>
+          </div>
+
+          <span id="robot-mode-badge" class="robot-mode-badge">
+            WAITING
+          </span>
+        </div>
+
+        <div id="reasoning-content">
+          <div class="reasoning-empty">
+            <div class="robot-icon" aria-hidden="true">🤖</div>
+
+            <h3>The robot is waiting.</h3>
+
+            <p>
+              Complete the delivery challenge. After your turn, the robot will
+              inspect the warehouse state, score possible actions, and explain
+              its next move.
+            </p>
+          </div>
+        </div>
+
+        <p class="technical-note">
+          “Thinking” is a visual explanation of the agent’s state observation
+          and action values. It is not human-like reasoning.
+        </p>
+      </aside>
+    </section>
+
+    <section class="legend-section">
+      <p class="small-label">GAME LEGEND</p>
+
+      <div class="legend">
+        <div class="legend-item">
+          <span class="legend-symbol robot-symbol">●</span>
+          Robot
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-symbol package-symbol">■</span>
+          Package
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-symbol goal-symbol">◆</span>
+          Delivery zone
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-symbol wall-symbol">▦</span>
+          Wall
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./game.js"></script>
+</body>
+</html>
