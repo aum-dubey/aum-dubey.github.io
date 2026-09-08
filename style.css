@@ -720,6 +720,13 @@ nav a:hover {
   }
 }
 
+@media (max-width: 600px) {
+  .game-float {
+    right: 16px;
+    bottom: 88px;
+    min-width: 0;
+  }
+}
 /* Animate only when the visitor has not requested reduced motion */
 @media (prefers-reduced-motion: no-preference) {
   .game-float,
