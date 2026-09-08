@@ -592,6 +592,161 @@ nav a:hover {
     gap: 15px;
 }
 
+/* Floating AI Lab game launcher */
+.game-float {
+  position: fixed;
+  right: 50px;
+  bottom: 130px;
+  z-index: 999;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  min-width: 238px;
+  padding: 11px 13px 11px 11px;
+
+  border: 1px solid #111111;
+  border-radius: 16px;
+
+  color: #ffffff;
+  background: #111111;
+  box-shadow: 5px 5px 0 #d8d8d2;
+
+  text-decoration: none;
+}
+
+.game-float-icon {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  place-items: center;
+
+  border: 1px solid #454545;
+  border-radius: 12px;
+  background: #202020;
+
+  font-size: 1.25rem;
+}
+
+.game-float-content {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.game-float-title {
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+
+.game-float-subtitle {
+  color: #bababa;
+  font-size: 0.73rem;
+  font-weight: 600;
+}
+
+.game-float-arrow {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+
+  border-radius: 50%;
+  color: #111111;
+  background: #ffffff;
+
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* Visible keyboard accessibility */
+.game-float:focus-visible {
+  outline: 3px solid #7bb7ff;
+  outline-offset: 4px;
+}
+
+/* Desktop hover effect */
+@media (hover: hover) and (pointer: fine) {
+  .game-float:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 #d8d8d2;
+  }
+
+  .game-float:hover .game-float-arrow {
+    transform: rotate(45deg);
+  }
+
+  .game-float:hover .game-float-icon {
+    border-color: #777777;
+  }
+}
+
+/* Phone layout */
+@media (max-width: 600px) {
+  .game-float {
+    right: 16px;
+    bottom: 16px;
+
+    min-width: 0;
+    padding: 10px 12px 10px 10px;
+    border-radius: 14px;
+  }
+
+  .game-float-icon {
+    width: 39px;
+    height: 39px;
+    flex-basis: 39px;
+    border-radius: 10px;
+    font-size: 1.12rem;
+  }
+
+  .game-float-title {
+    font-size: 0.81rem;
+  }
+
+  .game-float-subtitle {
+    font-size: 0.68rem;
+  }
+
+  .game-float-arrow {
+    display: none;
+  }
+}
+
+/* Animate only when the visitor has not requested reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .game-float,
+  .game-float-arrow,
+  .game-float-icon {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .game-float-icon {
+    animation: game-float-pulse 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes game-float-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.07);
+  }
+}
+
 
 /* =========================================
    FOOTER
